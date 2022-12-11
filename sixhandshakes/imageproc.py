@@ -55,20 +55,7 @@ class CaptchaImage:
 
 
 if __name__ == "__main__":
-    import time
-    from rich.progress import track
-    import rich
-    
-    
-    tr = track(range(10))
-    rich.inspect(tr)
-    tr.send(None)
-    for i in range(10):
-        try:
-            tr.send(i)
-        except:
-            tr.close()
-        time.sleep(.7)
+    ...
     
     
 
