@@ -8,9 +8,10 @@ from rich import print
 from rich.progress import track
 from rich.progress import Progress
 import vk_api
-
-import imageproc
-
+try:
+    import imageproc
+except:
+    from sixhandshakes import imageproc
 
 class User:
     
