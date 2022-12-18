@@ -122,17 +122,6 @@ class ReadWriteSecret:
     
     
 
-
-
-if __name__ == "__main__":
-    
-    conf = ReadWriteSecret()
-    conf.write('login', 'parol', MAX=340)
-    conf.read()
-    print()
-    conf.update_setting(MAX=98, LOG='NEW', POS=765)
-    conf.read()
-    print('='*20)
     
 
 

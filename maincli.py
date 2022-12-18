@@ -15,19 +15,32 @@ from sixhandshakes.writereadfiles import (
                                 )
 
 
+conf_help = '''
+Команда записи данных в файл конфигурации.
+Логин и пароль передаются обязательно.
+'''
+run_help = '''
+Команда запуска поиска. ID первого и последнего
+пользователей в цепочки являются обязательными. Другие переданные
+аргументы перезапишут значения в конфигурации.
+'''
 
-parser = argparse.ArgumentParser(description='Шесть рукопожатий')
-sub = parser.add_subparsers(title='sub', help='abc')
+read_help = '''
+Команда вывода содержимого файла конфигурации.
+'''
 
-confparser = sub.add_parser('conf')
+parser = argparse.ArgumentParser(description='Поиск цепочек друзей между двумя пользователями ВК')
+sub = parser.add_subparsers(title='sub')
+
+confparser = sub.add_parser('conf', help=conf_help)
 confparser.set_defaults(command='conf')
-confparser.add_argument('login', default=None)
-confparser.add_argument('password')
-confparser.add_argument('-t', '--token')
-confparser.add_argument('-a', '--appid')
+confparser.add_argument('login', help='логин в вк')
+confparser.add_argument('password', help='пароль от страницы в вк')
+confparser.add_argument('-t', '--token', help='token')
+confparser.add_argument('-a', '--appid', help='id приложения', type=int)
 
 
-runparser = sub.add_parser('run')
+runparser = sub.add_parser('run', help=run_help)
 runparser.set_defaults(command='run')
 runparser.add_argument('first_id', help='id первого профиля', type=int)
 runparser.add_argument('last_id',  help='id последнего профиля', type=int)
@@ -36,14 +49,14 @@ runparser.add_argument('-m', '--maxnum', help='максимальное коли
 runparser.add_argument('-c', '--cnt', help='максимальное число друзей профилей', type=int)
 
 
-readparser = sub.add_parser('read')
+readparser = sub.add_parser('read', help=read_help)
 readparser.set_defaults(command='read')
 
 
 
 if __name__ == "__main__":
     
-    args = parser.parse_args()
+    args = parser.parse_args(['--help'])
     readwriter = ReadWriteSecret()
     
     if args.command == 'conf':

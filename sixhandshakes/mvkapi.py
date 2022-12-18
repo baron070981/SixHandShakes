@@ -13,6 +13,8 @@ try:
 except:
     from sixhandshakes import imageproc
 
+
+
 class User:
     
     fields = [
@@ -90,6 +92,7 @@ class User:
         return (self.is_closed == True and self.can_access_closed == True)\
                 or (self.is_closed == False and self.can_access_closed == True)
     
+    
     @staticmethod
     def is_valid_user(user) -> bool:
         # проверяет что профиль юзера не скрыт и к нему есть доступ у
@@ -102,12 +105,14 @@ class User:
         elif isinstance(user, User):
             return user.is_accessible
     
+    
     @staticmethod
     def create_users(user_list: List[dict], shuffle: bool=False):
         # создание списка объектов User
         user_list = User.filter_users(user_list.copy(), shuffle)
         user_list = list(map(lambda x: User(**x), user_list))
         return user_list
+    
     
     @staticmethod
     def filter_users(user_list: List[dict], shuffle: bool=False) -> List[dict]:
@@ -122,6 +127,7 @@ class User:
         d = self.__dict__
         res = d.get(key, None)
         return res if res else default
+
 
 
 class Chain:
@@ -153,24 +159,29 @@ class Chain:
         users = list(map(lambda x: x.user_id, users))
         self.cache.extend(list(users))
     
+    
     def clear(self) -> None:
         # очистка кэша и цепочки
         self.chain.clear()
         self.cache.clear()
     
+    
     def clear_cache(self) -> None:
         # очистка только кэша
         self.cache.clear()
     
+    
     def is_not_in_cache(self, user_id: int) -> bool:
         # проверка что id не нахлдится в кэше
         return user_id not in self.cache
+    
     
     def pop_back(self):
         try:
             self.chain.pop()
         except:
             pass
+    
     
     def copy(self):
         chain = Chain()
